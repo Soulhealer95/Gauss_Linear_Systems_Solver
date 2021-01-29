@@ -35,6 +35,8 @@ void Upper_TLS(int size, float** Matrix, float* Vector) {
 		temp_arr[i] = Vector[i]/Matrix[i][i];
 		for(int j = i-1; j >= 0; j--) {
 			Vector[j] = Vector[j] - (Matrix[j][i] * temp_arr[i]);
+			printf("Upper_TLS(): After Elimination at %i, b:\n", j);
+			print_vector(size, Vector);
 		}
 	}
 	
@@ -98,6 +100,15 @@ void GaussPP(int size, float** Matrix, float* Vector) {
 			Row_Oper(size, ROW_SWAP, k, high_r, 0, Matrix);
 			Row_Oper(size, ROW_SWAP, k, high_r, 0, temp_arr);
 			vec_oper(size, ROW_SWAP, k, high_r, 0, Vector);
+
+			// Print status of matrix after each pivot swap
+			printf("After Row Swap:\n");
+			printf("A:\n");
+			print_matrix(size, Matrix);
+			printf("L:\n");
+			print_matrix(size, temp_arr);
+			printf("b:\n");
+			print_vector(size, Vector);
 			
 		}
 
@@ -116,8 +127,12 @@ void GaussPP(int size, float** Matrix, float* Vector) {
 		for(int j = k+1; j < size; j++) {
 			for(int i = k+1; i < size; i++) {
 				Matrix[i][j] = Matrix[i][j] - (temp_arr[i][k] * Matrix[k][j]);
+				printf("After Elimination at %i, A:\n", j);
+				print_matrix(size, Matrix);
 			}
 			Vector[j] = Vector[j] - (temp_arr[j][k] * Vector[k]);
+			printf("After Elimination, b:\n");
+			print_vector(size, Vector);
 		}
 
 	}
@@ -179,7 +194,6 @@ void GaussLU(int size, float** Matrix, float* Vector) {
 	}
 
 	// Calculate
-	printf("\n... Calculating ...\n");
 	for (int k = 0; k < size-1; k++) {
 		// Compute Multipliers
 		for(int i = k+1; i < size; i++)
@@ -192,14 +206,16 @@ void GaussLU(int size, float** Matrix, float* Vector) {
 		for(int j = k+1; j < size; j++) {
 			for(int l = k+1; l < size; l++) {
 				Matrix[l][j] = Matrix[l][j] - (temp_arr[l][k] * Matrix[k][j]);
+				printf("After Elimination at %i, A:\n", l);
+				print_matrix(size, Matrix);
 			}
 			Vector[j] = Vector[j] - (temp_arr[j][k] * Vector[k]);
+			printf("After Elimination, b:\n");
+			print_vector(size, Vector);
 		}
 	}
 
 	// Print Results
-	printf("\n... Done ...\n");
-	
 	printf("Pre Result:\n");
 	printf("A:\n");
 	print_matrix(size, Matrix);
@@ -208,6 +224,7 @@ void GaussLU(int size, float** Matrix, float* Vector) {
 	printf("b:\n");
 	print_vector(size, Vector);
 
+	// Solve the Linear System Equation
 	Upper_TLS(size, Matrix, Vector);
 
 	// Cleanup

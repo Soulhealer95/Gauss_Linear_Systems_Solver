@@ -1,3 +1,12 @@
+/*		Gauss Elimination LU Decomposition
+ * Uses Gauss Elimination to Solve System of Linear Equations
+ * 
+ *
+ * Author:					Dated				
+ * Shivam S.					29-Jan-21
+ * Student, McMasterU
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include "headers/Matrix.h"
@@ -23,23 +32,8 @@ int main(void) {
 	Vector = malloc(sizeof(float)*size_m);
 	get_vector(size_m, Vector);
 	Matrix_A = get_matrix(size_m, SET_VAL);
-/*
-	// Print the Matrix
-	print_matrix(size_m, Matrix_A);
-	print_vector(size_m, Vector);
-
-
-	// Swap 2 rows
-	Row_Oper(size_m, ROW_SWAP, 0, 1, 0, Matrix_A);
-	print_matrix(size_m, Matrix_A);
 	
-	// Do a R2 -> R2 - 4R1
-	Row_Oper(size_m, ROW_OPER, 0, 1, -4, Matrix_A);
-	print_matrix(size_m, Matrix_A);
-	vec_oper(size_m, ROW_OPER, 0, 1, -4, Vector);
-	print_vector(size_m, Vector);
-*/
-
+	// Call Gauss LU Elimination Function
 	GaussLU(size_m, Matrix_A, Vector);
 
 	// Cleanup

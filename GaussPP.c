@@ -1,3 +1,12 @@
+/*		Gauss Elimination Partial Pivoting
+ * Uses Gauss Elimination to Solve System of Linear Equations
+ * 
+ *
+ * Author:					Dated				
+ * Shivam S.					29-Jan-21
+ * Student, McMasterU
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include "headers/Matrix.h"

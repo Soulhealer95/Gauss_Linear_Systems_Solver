@@ -73,7 +73,8 @@ void GaussPP(int size, float** Matrix, float* Vector) {
 
 	float** temp_arr = get_matrix(size, SET_ZERO);
 	int temp_num1, temp_num2 = 0;
-	
+
+
 	// Print Original Matrix
 	printf("Starting Values:\n");
 	printf("A:\n");
@@ -135,6 +136,11 @@ void GaussPP(int size, float** Matrix, float* Vector) {
 			print_vector(size, Vector);
 		}
 
+	}
+
+	// Set diagonals to 1 in L
+	for (int i=0; i < size; i++) {
+		temp_arr[i][i] = 1;
 	}
 
 	// Print Result from Gauss Partial Pivot
@@ -213,6 +219,11 @@ void GaussLU(int size, float** Matrix, float* Vector) {
 			printf("After Elimination, b:\n");
 			print_vector(size, Vector);
 		}
+	}
+
+	// Set diagonals to 1 in L
+	for (int i=0; i < size; i++) {
+		temp_arr[i][i] = 1;
 	}
 
 	// Print Results

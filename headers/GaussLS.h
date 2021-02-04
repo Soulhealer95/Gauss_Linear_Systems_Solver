@@ -29,13 +29,13 @@ void Upper_TLS(int size, float** Matrix, float* Vector) {
 	// Loop backwards to compute x
 	for(int i = size-1; i >= 0; i--) {
 		if(Matrix[i][i] == 0) {
-			printf("Matrix is Singular! Exiting!\n");
+			printf("Division By Zero! Exiting!\n");
 			return;
 		}
 		temp_arr[i] = Vector[i]/Matrix[i][i];
-		for(int j = i-1; j >= 0; j--) {
+		for(int j = 0; j < size; j++) {
 			Vector[j] = Vector[j] - (Matrix[j][i] * temp_arr[i]);
-			printf("Upper_TLS(): After Elimination at %i, b:\n", j);
+			printf("Upper_TLS(): After Elimination at %i with x%i = %.2f, b:\n", j, i, temp_arr[i]);
 			print_vector(size, Vector);
 		}
 	}
